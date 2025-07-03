@@ -31,8 +31,6 @@ docker compose up -d
 - **Organization:** `example-org`
 - **Bucket:** `example-bucket`
 
----
-
 ## Loading Sample Data
 
 ### Option 1: Use the UI to Load Air Sensor Sample Data
@@ -72,7 +70,10 @@ from(bucket: "example-bucket")
 |> yield()
 ```
 
----
+## Stopping the Stack
+```
+docker compose down
+```
 
 ## Troubleshooting
 
