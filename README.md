@@ -1,12 +1,14 @@
 # InfluxDB Docker Classroom Setup
 
-This repository provides a ready-to-use InfluxDB 2.x Docker setup for classroom and experimentation purposes. It includes instructions for running InfluxDB, loading sample time-series data, and exploring the data using Flux queries and the InfluxDB UI.
+This repository provides a ready-to-use InfluxDB Docker setup for classroom and experimentation purposes. It includes instructions for running InfluxDB, loading sample time-series data, and exploring the data using Flux queries and the InfluxDB UI.
 
 
 ## Requirements
 
 - **Docker Desktop** (Windows 11, macOS, or Linux)
 - **Git** (to clone this repository)
+- **VSCode** (to write or edit your code)
+- **Python** (to execute you code)
 
 
 ## Getting Started
@@ -21,42 +23,48 @@ cd influxdb-docker-demo
 ```
 docker compose up -d
 ```
-- This will start InfluxDB 2.x on your machine, accessible at [http://localhost:8086](http://localhost:8086).
+- This will start InfluxDB on your machine, accessible at [http://localhost:8086](http://localhost:8086).
 
 ### 3. Log in to InfluxDB
 
 - Open your browser and go to [http://localhost:8086](http://localhost:8086)
 - **Username:** `admin`
 - **Password:** `adminpassword`
-- **Organization:** `example-org`
-- **Bucket:** `example-bucket`
 
 ## Loading Sample Data
 
-### Option 1: Use the UI to Load Air Sensor Sample Data
+1. Create and activate a virtual environment (assuming that you are inside the project's folder):
 
-1. In the InfluxDB UI, go to **Data > Buckets** and confirm `example-bucket` exists.
-2. Go to **Data > Tasks** and create a new task.
-3. Paste the following Flux script (or use `sample_air_sensor.flux` if provided):
+```powershell
+# Create virtual environment
+python -m venv venv
+
+# Activate it (Windows PowerShell)
+.\venv\Scripts\Activate.ps1
+
+# Or on Windows Command Prompt
+.\venv\Scripts\activate.bat
+
+# Or on Linux/Mac
+source venv/bin/activate
 ```
-import "influxdata/influxdb/sample"
 
-option task = {
-name: "Collect air sensor sample data",
-every: 15m,
-}
-
-sample.data(set: "airSensor")
-|> to(bucket: "example-bucket")
+2. Install required packages:
+```
+pip install -r requirements.txt
 ```
 
-4. Save and run the task. This will periodically load air sensor sample data into your bucket.
+3. Run the data loading script:
+```
+python load_sample_data.py
+```
 
+This will generate and load 48 hours of sample air sensor data (temperature, humidity, CO levels) from 4 different sensors.
 
 ## Exploring Data
 
-1. Go to the **Explore** tab in the InfluxDB UI.
-2. Set the **time range** (top right) to a wide interval, such as **"All Time"** or the last 30 days.
+1. Go to the **Data Explorer** tab in the InfluxDB UI.
+2. Set the **time range** (top right) to a wide interval, or alternativelly 
 3. Use the **Script Editor** and paste this query to see all air sensor data:
 ```
 from(bucket: "example-bucket")
@@ -71,23 +79,34 @@ from(bucket: "example-bucket")
 ```
 
 ## Stopping the Stack
+
+**To stop InfluxDB (keeps data):**
 ```
 docker compose down
 ```
 
-## Troubleshooting
+**To stop and remove all data (fresh start):**
+```
+docker compose down -v
+```
+This removes the containers and volumes, allowing you to start completely fresh on the next `docker compose up -d`.
 
-| Issue                        | Solution                                                                                               |
-|------------------------------|--------------------------------------------------------------------------------------------------------|
-| **No data in Explore tab**   | Set time range to "All Time". Use the Script Editor with the query above.                             |
-| **Large response error**     | Use a narrower time range (e.g., `range(start: -7d)`) and/or increase the `aggregateWindow` interval. |
-| **No graph, only columns**   | Ensure your query filters both measurement and fields as shown above.                                 |
-| **Data not appearing**       | Refresh the UI or re-run the data loading task.                                                       |
+**To manually clean up data directories:**
+```powershell
+# Windows PowerShell
+Remove-Item -Recurse -Force .\data\*, .\config\*
 
-## Credits
+# Linux/Mac
+rm -rf ./data/* ./config/*
+```
 
-- [InfluxData Sample Data Documentation](https://docs.influxdata.com/influxdb/latest/sample-data/)
-- [InfluxDB Docker Hub](https://hub.docker.com/_/influxdb)
+## Deactivating the Virtual Environment
+
+When you are done working in your Python virtual environment, you can deactivate it by running:
+```
+deactivate
+```
+This works on Windows, Mac, and Linux.
 
 
 
