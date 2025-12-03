@@ -1,4 +1,4 @@
-# Exercise: Analyzing Environmental Air Sensor Data with InfluxDB
+# Mini Projects: Analyzing Environmental Air Sensor Data with InfluxDB
 
 ## Objective
 Explore, analyze, and visualize environmental air sensor data stored in InfluxDB. Use Flux queries to extract insights and Python (pandas/matplotlib) to create at least one visualization for your findings.
@@ -47,26 +47,4 @@ Choose one of the following mini-projects (or propose your own):
     |> yield()
     ```
 
-4. Export Data for Visualization
-- Use the InfluxDB UI to export query results as CSV (look for the download/export button).
-- Alternatively, use Python to query InfluxDB directly (optional advanced step).
-
-
-5. Visualize with Python (pandas/matplotlib)
-- Load the CSV into pandas and create a relevant plot (e.g., line chart for temperature trends, bar chart for CO comparison).
-
-    Example code:
-    ```python
-    import pandas as pd
-    import matplotlib.pyplot as plt
-
-    df = pd.read_csv("your_exported_data.csv")
-    df['time'] = pd.to_datetime(df['_time'])
-    plt.plot(df['time'], df['_value'])
-    plt.title("Average Temperature per Hour (TLM0100)")
-    plt.xlabel("Time")
-    plt.ylabel("Temperature (°C)")
-    plt.tight_layout()
-    plt.savefig("temperature_trend.png")
-    plt.show()
-    ```
+Sample answers [here](./mini_projects_answers.md) 

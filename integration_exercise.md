@@ -1,4 +1,4 @@
-## Optional and Advanced Task: Connect to InfluxDB Using Python and Query Data Directly
+## Integration Exercise: Connect to InfluxDB Using Python and Query Data Directly
 Instead of exporting CSVs from the InfluxDB UI, you can use Python to connect to your InfluxDB instance, run Flux queries, and visualize the results with pandas and matplotlib.
 
 1. Gather Your Connection Details

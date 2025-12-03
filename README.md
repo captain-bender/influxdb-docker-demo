@@ -78,12 +78,12 @@ from(bucket: "example-bucket")
 |> yield()
 ```
 
-## Stopping the Stack
+## Experiment with exercises
+- Beasic Flux examples [here](./flux_basic_examples.md)
+- Mini projects [here](./mini_projects.md)
+- Integration exercises with Python [here](./integration_exercise.md)
 
-**To stop InfluxDB (keeps data):**
-```
-docker compose down
-```
+## Stopping the Stack
 
 **To stop and remove all data (fresh start):**
 ```
