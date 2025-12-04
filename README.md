@@ -17,7 +17,7 @@ This repository provides a ready-to-use InfluxDB Docker setup for classroom and 
 
 ### 1. Clone the Repository
 ```
-git clone https://github.com/yourusername/influxdb-docker-demo.git
+git clone https://github.com/captain-bender/influxdb-docker-demo.git
 cd influxdb-docker-demo
 ```
 
