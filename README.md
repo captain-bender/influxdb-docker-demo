@@ -13,6 +13,8 @@ This repository provides a ready-to-use InfluxDB Docker setup for classroom and 
 
 ## Getting Started
 
+### 0. Start your Docker Desktop application
+
 ### 1. Clone the Repository
 ```
 git clone https://github.com/yourusername/influxdb-docker-demo.git
