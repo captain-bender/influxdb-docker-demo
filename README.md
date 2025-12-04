@@ -35,7 +35,7 @@ docker compose up -d
 
 1. Go to the **Data Explorer** tab in the InfluxDB UI.
 2. Set the **time range** (top right) to a wide interval, or alternativelly 
-3. Use the **Script Editor** and paste this query to see all air sensor data:
+3. Use the **Script Editor** ([Figure](./pic1.png))and paste this query to see all air sensor data:
 ```
 from(bucket: "example-bucket")
 |> range(start: -7d)
