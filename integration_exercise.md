@@ -88,4 +88,9 @@ Replace the variables with your actual values:
 
 - Use DataFrame methods to further analyze or aggregate the data before plotting.
 
-6. Complete your experiments and type **deactivate** to terminal ine order to stop venv.
+6. Complete your experiments and type **deactivate** to terminal in order to stop venv.
+
+```
+deactivate
+```
+so you will not see **(venv)** at the beginning of the line.
