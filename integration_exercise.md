@@ -1,18 +1,39 @@
 ## Integration Exercise: Connect to InfluxDB Using Python and Query Data Directly
 Instead of exporting CSVs from the InfluxDB UI, you can use Python to connect to your InfluxDB instance, run Flux queries, and visualize the results with pandas and matplotlib.
 
-1. Gather Your Connection Details
+1. Create and activate a virtual environment (assuming that you are inside the project's folder):
+
+```powershell
+# Create virtual environment
+python -m venv venv
+
+# Activate it (Windows PowerShell)
+.\venv\Scripts\Activate.ps1
+
+# Or on Windows Command Prompt
+.\venv\Scripts\activate.bat
+
+# Or on Linux/Mac
+source venv/bin/activate
+```
+
+2. Install required packages:
+```
+pip install -r requirements.txt
+```
+
+3. Gather Your Connection Details
 You’ll need:
 
 - URL: Usually http://localhost:8086
 
-- Token: (Find this in InfluxDB UI under Load Data > API Tokens. Use Full-Access.)
+- Generate a new API Token: (Find this in InfluxDB UI under Load Data > API Tokens. Use "All Access API Token" option.)
 
 - Org: (Your organization name, e.g., example-org)
 
 - Bucket: (e.g., example-bucket)
 
-2. Example Python Script to Query and Visualize Data
+4. Example Python Script to Query and Visualize Data
 Replace the variables with your actual values:
     ```python
     import pandas as pd
@@ -62,7 +83,9 @@ Replace the variables with your actual values:
     ```
     This script connects to your InfluxDB, runs a Flux query, loads the results into a pandas DataFrame, and plots the temperature trend.
 
-4. Experiment and Extend
+5. Experiment and Extend
 - Try changing the Flux query to analyze different sensors, fields (co, humidity), or time windows.
 
 - Use DataFrame methods to further analyze or aggregate the data before plotting.
+
+6. Complete your experiments and type **deactivate** to terminal ine order to stop venv.

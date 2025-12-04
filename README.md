@@ -31,37 +31,7 @@ docker compose up -d
 - **Username:** `admin`
 - **Password:** `adminpassword`
 
-## Loading Sample Data
-
-1. Create and activate a virtual environment (assuming that you are inside the project's folder):
-
-```powershell
-# Create virtual environment
-python -m venv venv
-
-# Activate it (Windows PowerShell)
-.\venv\Scripts\Activate.ps1
-
-# Or on Windows Command Prompt
-.\venv\Scripts\activate.bat
-
-# Or on Linux/Mac
-source venv/bin/activate
-```
-
-2. Install required packages:
-```
-pip install -r requirements.txt
-```
-
-3. Run the data loading script:
-```
-python load_sample_data.py
-```
-
-This will generate and load 48 hours of sample air sensor data (temperature, humidity, CO levels) from 4 different sensors.
-
-## Exploring Data
+### 4. Exploring Data
 
 1. Go to the **Data Explorer** tab in the InfluxDB UI.
 2. Set the **time range** (top right) to a wide interval, or alternativelly 
@@ -86,10 +56,22 @@ from(bucket: "example-bucket")
 ## Stopping the Stack
 
 **To stop and remove all data (fresh start):**
+If you want to stop the stack and remove all containers, images and data so the next `up` starts from a fresh state, follow the commands below.
+
+- Using Docker Compose: this stops services, removes containers, networks, images that were built by Compose, and deletes named volumes created by the compose file. WARNING: deleting volumes will permanently remove the database contents.
+
+In order to stop the execution, please press CTRL+C, and then
+
+```powershell
+cd C:\Users\<your path>\Documents\mysql-docker-demo
+docker compose down --rmi all -v --remove-orphans
 ```
-docker compose down -v
-```
-This removes the containers and volumes, allowing you to start completely fresh on the next `docker compose up -d`.
+
+- What the flags do:
+	- `--rmi all`: removes images built by Compose (your `classicmodels-mysql` image created by `build`).
+	- `-v`: removes named volumes declared in `docker-compose.yml` (this deletes DB data).
+	- `--remove-orphans`: removes containers from previous runs that are not defined in this compose file.
+
 
 **To manually clean up data directories:**
 ```powershell
