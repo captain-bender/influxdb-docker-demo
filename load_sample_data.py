@@ -8,11 +8,14 @@ from datetime import datetime, timedelta, timezone
 import random
 
 # InfluxDB connection details
-url = "http://localhost:8086"
-username = "admin"
-password = "adminpassword"
-org = "example-org"
-bucket = "example-bucket"
+import os
+
+# Read connection settings from environment (useful inside Docker)
+url = os.getenv("INFLUX_URL", "http://localhost:8086")
+username = os.getenv("INFLUX_USERNAME", "admin")
+password = os.getenv("INFLUX_PASSWORD", "adminpassword")
+org = os.getenv("INFLUX_ORG", "example-org")
+bucket = os.getenv("INFLUX_BUCKET", "example-bucket")
 
 def generate_sample_data(hours=48):
     """Generate sample air sensor data for the specified number of hours"""

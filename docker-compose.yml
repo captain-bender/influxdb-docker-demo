@@ -14,3 +14,20 @@ services:
     volumes:
       - ./data:/var/lib/influxdb2
       - ./config:/etc/influxdb2
+  loader:
+    build:
+      context: .
+      dockerfile: Dockerfile.loader
+    depends_on:
+      - influxdb
+    environment:
+      INFLUX_URL: "http://influxdb:8086"
+      INFLUX_USERNAME: "admin"
+      INFLUX_PASSWORD: "adminpassword"
+      INFLUX_ORG: "example-org"
+      INFLUX_BUCKET: "example-bucket"
+      MAX_RETRIES: "60"
+      SLEEP_SECONDS: "2"
+    volumes:
+      - .:/app:ro
+    # The loader runs once and exits after loading data
